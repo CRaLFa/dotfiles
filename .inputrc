@@ -1,0 +1,5 @@
+set completion-ignore-case on
+set colored-completion-prefix on
+set colored-stats on
+
+"\C-j": unix-filename-rubout

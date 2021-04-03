@@ -1,0 +1,3 @@
+.prompt "\nsqlite > " "    ...> "
+.headers on
+.mode column
