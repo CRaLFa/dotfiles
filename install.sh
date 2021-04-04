@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 DOT_DIR="$HOME/.dotfiles"
-# GIT_REPO='https://github.com/CRaLFa/dotfiles.git'
-GIT_REPO='git@github.com:CRaLFa/dotfiles.git'
+GIT_REPO='https://github.com/CRaLFa/dotfiles.git'
+# GIT_REPO='git@github.com:CRaLFa/dotfiles.git'
 
 which git > /dev/null 2>&1 || {
     echo 'Please install git.' >&2
@@ -26,5 +26,5 @@ cd $DOT_DIR
 for f in .??*
 do
     [[ "$f" == '.git' ]] && continue
-    ln -snfv "$DOT_DIR/$f" "$HOME/$f"
+    ln -sfv "$DOT_DIR/$f" "$HOME/$f"
 done

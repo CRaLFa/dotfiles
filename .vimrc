@@ -10,8 +10,6 @@ set helpheight=999
 set helplang=ja
 set hlsearch
 set ignorecase
-set iminsert=0
-set imsearch=-1
 set incsearch
 set laststatus=2
 set lazyredraw
@@ -41,11 +39,13 @@ set wrapscan
 nnoremap / /\v
 nnoremap Y y$
 
+" Netrw filer settings
 let g:netrw_liststyle=3
 let g:netrw_banner=0
 let g:netrw_altv=1
 let g:netrw_winsize=80
 
+" Jump to the last edited position
 if has("autocmd")
   autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -53,6 +53,7 @@ if has("autocmd")
     \ endif
 endif
 
+" Install plugins using dein.vim
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
@@ -61,13 +62,19 @@ if &runtimepath !~# '/dein.vim'
     exe '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
   endif
   exe 'set runtimepath^=' . s:dein_repo_dir
+
+  if !isdirectory(s:dein_dir)
+    call mkdir(s:dein_dir)
+  endif
 endif
 
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
   let s:toml = expand('~/.vim') . '/dein.toml'
-  call dein#load_toml(s:toml, { 'lazy': 0 })
+  if filereadable(s:toml)
+    call dein#load_toml(s:toml, { 'lazy': 0 })
+  endif
 
   call dein#end()
   call dein#save_state()
