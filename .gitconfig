@@ -4,9 +4,6 @@
     autocrlf = false
     ignorecase = false
     quotepath = false
-[user]
-    email = minami.smd@gmail.com
-    name = rana
 [pull]
     rebase = false
 [fetch]

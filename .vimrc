@@ -57,15 +57,15 @@ endif
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
+if !isdirectory(s:dein_dir)
+  call mkdir(s:dein_dir, 'p')
+endif
+
 if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_repo_dir)
     exe '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
   endif
   exe 'set runtimepath^=' . s:dein_repo_dir
-
-  if !isdirectory(s:dein_dir)
-    call mkdir(s:dein_dir)
-  endif
 endif
 
 if dein#load_state(s:dein_dir)
