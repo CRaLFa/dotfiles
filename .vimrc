@@ -45,11 +45,21 @@ let g:netrw_banner=0
 let g:netrw_altv=1
 let g:netrw_winsize=80
 
+" lightline.vim settings
+let g:lightline = {
+  \ 'colorscheme': 'wombat'
+  \ }
+
+" comfortable-motion.vim settings
+let g:comfortable_motion_interval = 2400.0 / 60
+let g:comfortable_motion_friction = 100.0
+let g:comfortable_motion_air_drag = 3.0
+
 " Jump to the last edited position
-if has("autocmd")
+if has('autocmd')
   autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
+    \ if line("'\"") > 0 && line("'\"") <= line('$') |
+    \   exe 'normal g`"' |
     \ endif
 endif
 
@@ -71,7 +81,7 @@ endif
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  let s:toml = expand('~/.vim') . '/dein.toml'
+  let s:toml = fnamemodify(resolve(expand('<sfile>:p')), ':h') . '/dein.toml'
   if filereadable(s:toml)
     call dein#load_toml(s:toml, { 'lazy': 0 })
   endif
