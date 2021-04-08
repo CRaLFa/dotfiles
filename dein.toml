@@ -12,3 +12,18 @@ repo = 'itchyny/lightline.vim'
 
 [[plugins]]
 repo = 'yuttie/comfortable-motion.vim'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'tomasiser/vim-code-dark'
+
+[[plugins]]
+repo = 'previm/previm'
+
+[[plugins]]
+repo = 'alvan/vim-closetag'

@@ -30,6 +30,7 @@ set softtabstop=4
 set splitbelow
 set splitright
 set tabstop=4
+set updatetime=100
 set virtualedit=onemore
 set whichwrap=b,s,h,l,<,>,[,]
 set wildmenu
@@ -51,9 +52,13 @@ let g:lightline = {
   \ }
 
 " comfortable-motion.vim settings
-let g:comfortable_motion_interval = 2400.0 / 60
+let g:comfortable_motion_interval = 1200.0 / 60
 let g:comfortable_motion_friction = 100.0
 let g:comfortable_motion_air_drag = 3.0
+
+" previm settings
+let g:previm_open_cmd = '/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
+let g:previm_wsl_mode = 1
 
 " Jump to the last edited position
 if has('autocmd')
@@ -94,5 +99,7 @@ if dein#check_install()
   call dein#install()
 endif
 
+" Enable syntax highlight and set color scheme
 syntax enable
 filetype plugin indent on
+colorscheme codedark
