@@ -27,3 +27,9 @@ repo = 'previm/previm'
 
 [[plugins]]
 repo = 'alvan/vim-closetag'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
