@@ -38,6 +38,7 @@ set wrapscan
 
 nnoremap / /\v
 nnoremap Y y$
+nnoremap <Esc>z :set wrap!<CR>
 
 let s:dot_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
@@ -71,9 +72,9 @@ let g:previm_custom_css_path = s:dot_dir . '/vim/markdown.css'
 " Jump to the last edited position
 if has('autocmd')
   autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line('$') |
-    \   exe 'normal g`"' |
-    \ endif
+  \ if line("'\"") > 0 && line("'\"") <= line('$') |
+  \   exe 'normal g`"' |
+  \ endif
 endif
 
 " Install plugins using dein.vim
