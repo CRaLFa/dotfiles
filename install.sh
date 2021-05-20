@@ -3,7 +3,7 @@
 DOT_DIR="$HOME/.dotfiles"
 GIT_REPO='https://github.com/CRaLFa/dotfiles.git'
 
-which git > /dev/null 2>&1 || {
+which git &> /dev/null || {
     echo 'Please install git.' >&2
     exit 1
 }
