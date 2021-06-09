@@ -77,6 +77,17 @@ if has('autocmd')
   \ endif
 endif
 
+" Enable undo history
+if has('persistent_undo')
+  let s:undo_dir = expand('~/.vim/undo')
+  if !isdirectory(s:undo_dir)
+    call mkdir(s:undo_dir, 'p')
+  endif
+
+  set undodir=~/.vim/undo
+  set undofile
+endif
+
 " Install plugins using dein.vim
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
