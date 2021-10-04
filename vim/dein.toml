@@ -14,9 +14,6 @@ repo = 'itchyny/lightline.vim'
 repo = 'yuttie/comfortable-motion.vim'
 
 [[plugins]]
-repo = 'tpope/vim-fugitive'
-
-[[plugins]]
 repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
