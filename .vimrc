@@ -3,6 +3,7 @@ set autoread
 set background=dark
 set backspace=indent,eol,start
 set clipboard=unnamed,unnamedplus
+set completeopt=menuone,noinsert,noselect,preview
 set cursorline
 set display=lastline
 set expandtab
@@ -68,6 +69,16 @@ let g:previm_open_cmd = '/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Applicatio
 let g:previm_wsl_mode = 1
 " let g:previm_disable_default_css = 1
 let g:previm_custom_css_path = s:dot_dir . '/vim/markdown.css'
+
+" vim-lsp settings
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_text_edit_enabled = 0
+
+" asyncomplete.vim settings
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_completeopt = 0
+let g:asyncomplete_popup_delay = 200
 
 " Jump to the last edited position
 if has('autocmd')
