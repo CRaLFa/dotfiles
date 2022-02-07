@@ -67,7 +67,7 @@ let g:winresizer_horiz_resize = 1
 " previm settings
 let g:previm_open_cmd = '/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
 let g:previm_wsl_mode = 1
-" let g:previm_disable_default_css = 1
+let g:previm_disable_default_css = 0
 let g:previm_custom_css_path = s:dot_dir . '/vim/markdown.css'
 
 " vim-lsp settings
@@ -81,12 +81,10 @@ let g:asyncomplete_auto_completeopt = 0
 let g:asyncomplete_popup_delay = 200
 
 " Jump to the last edited position
-if has('autocmd')
-  autocmd BufReadPost *
-  \ if line("'\"") > 0 && line("'\"") <= line('$') |
-  \   exe 'normal g`"' |
-  \ endif
-endif
+autocmd BufReadPost *
+\ if line("'\"") > 0 && line("'\"") <= line('$') |
+\   execute 'normal g`"' |
+\ endif
 
 " Enable undo history
 if has('persistent_undo')
@@ -136,6 +134,30 @@ if len(s:removed_plugins) > 0
   call map(s:removed_plugins, "delete(v:val, 'rf')")
   call dein#recache_runtimepath()
 endif
+
+" Define key mappings for vim-lsp
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> gr <plug>(lsp-references)
+  nmap <buffer> gi <plug>(lsp-implementation)
+  nmap <buffer> gt <plug>(lsp-type-definition)
+  nmap <buffer> gs <plug>(lsp-document-symbol-search)
+  nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+  nmap <buffer> <F2> <plug>(lsp-rename)
+  nmap <buffer> ,p <plug>(lsp-previous-diagnostic)
+  nmap <buffer> ,n <plug>(lsp-next-diagnostic)
+  nmap <buffer> <C-k> <plug>(lsp-hover)
+  nnoremap <buffer> <expr><Up> lsp#scroll(-1)
+  nnoremap <buffer> <expr><Down> lsp#scroll(+1)
+endfunction
+
+augroup lsp_install
+  autocmd!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
 
 syntax enable
 filetype plugin indent on
