@@ -46,8 +46,11 @@ let s:dot_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 " Netrw filer settings
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
+let g:netrw_preview = 1
+let g:netrw_alto = 0
 let g:netrw_altv = 1
 let g:netrw_winsize = 80
+let g:netrw_browse_split = 4
 
 " lightline.vim settings
 let g:lightline = {
@@ -80,6 +83,10 @@ let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_auto_completeopt = 0
 let g:asyncomplete_popup_delay = 200
 
+" cursor style settings
+let &t_SI = "\e[5 q"
+let &t_EI = "\e[5 q"
+
 " Jump to the last edited position
 autocmd BufReadPost *
 \ if line("'\"") > 0 && line("'\"") <= line('$') |
@@ -107,10 +114,10 @@ endif
 
 if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_repo_dir)
-    exe '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
   endif
 
-  exe 'set runtimepath^=' . s:dein_repo_dir
+  execute 'set runtimepath^=' . s:dein_repo_dir
 endif
 
 if dein#load_state(s:dein_dir)
