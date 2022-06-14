@@ -6,6 +6,7 @@ export LANG='ja_JP.UTF-8'
 export EDITOR=/usr/bin/vim
 export GOPATH=$HOME/go
 export TEXTIMG_EMOJI_DIR=/usr/local/src/noto-emoji/png/512
+export DENO_INSTALL="/home/rana/.deno"
 
 PATH="$HOME/bin:$PATH"
 PATH="$HOME/.nodebrew/current/bin:$PATH"
@@ -13,6 +14,7 @@ PATH="/opt/certbot:$PATH"
 PATH="$GOPATH/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
+PATH="$DENO_INSTALL/bin:$PATH"
 export PATH
 
 umask 022

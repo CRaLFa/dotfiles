@@ -3,7 +3,7 @@ set autoread
 set background=dark
 set backspace=indent,eol,start
 set clipboard=unnamed,unnamedplus
-set completeopt=menuone,noinsert,noselect,preview
+set completeopt=menu,noinsert,noselect,preview
 set cursorline
 set display=lastline
 set expandtab

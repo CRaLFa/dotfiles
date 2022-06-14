@@ -24,6 +24,8 @@
     cm = commit
     co = checkout
     cp = cherry-pick
+    d = diff
+    dc = diff --cached
     f = fetch -p origin
     ignore = !git rm -r --cached . && git add -A
     ll = log --oneline --graph --decorate=full
