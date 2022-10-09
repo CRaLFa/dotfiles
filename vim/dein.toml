@@ -39,3 +39,6 @@ repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
 [[plugins]]
 repo = 'mattn/vim-goimports'
+
+[[plugins]]
+repo = 'CRaLFa/vim9-img-search'

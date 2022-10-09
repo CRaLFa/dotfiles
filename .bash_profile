@@ -15,6 +15,7 @@ PATH="$GOPATH/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 PATH="$DENO_INSTALL/bin:$PATH"
+PATH="/usr/local/zig-linux-x86_64-0.10.0:$PATH"
 export PATH
 
 umask 022

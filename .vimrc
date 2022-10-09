@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 set autoindent
 set autoread
 set background=dark
@@ -83,6 +85,10 @@ let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_auto_completeopt = 0
 let g:asyncomplete_popup_delay = 200
 
+" vim-img-search settings
+let g:img_search_max_width = 768
+let g:img_search_max_height = 432
+
 " cursor style settings
 let &t_SI = "\e[5 q"
 let &t_EI = "\e[5 q"
@@ -150,7 +156,7 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> gd <plug>(lsp-definition)
   nmap <buffer> gr <plug>(lsp-references)
   nmap <buffer> gi <plug>(lsp-implementation)
-  nmap <buffer> gt <plug>(lsp-type-definition)
+  nmap <buffer> gu <plug>(lsp-type-definition)
   nmap <buffer> gs <plug>(lsp-document-symbol-search)
   nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
   nmap <buffer> <F2> <plug>(lsp-rename)
