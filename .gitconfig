@@ -10,8 +10,6 @@
     prune = false
 [rebase]
     autoStash = false
-[url "git@github.com:"]
-    pushInsteadOf = https://github.com/
 [alias]
     a = "!f(){ git add $@ && git status; }; f"
     aa = !git add -A && git status
