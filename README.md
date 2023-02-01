@@ -3,5 +3,5 @@
 ## Installation
 
 ```sh
-curl -L https://raw.github.com/CRaLFa/dotfiles/master/install.sh | bash
+curl https://raw.githubusercontent.com/CRaLFa/dotfiles/master/install.sh | bash
 ```
