@@ -19,6 +19,21 @@ md () {
     mkdir "$1" && builtin cd $_
 }
 
+rd () {
+    (( $# < 1 )) && {
+        echo 'Usage: rd DIRECTORY' >&2
+        return 1
+    }
+    [ -d "$1" ] || {
+        echo "Error: Directory '$1' doesn't exist." >&2
+        return 1
+    }
+    rmdir "$1" 2> /dev/null || {
+        read -p "Remove non-empty directory '$1'? (y/N) : " answer
+        [ "$answer" = 'y' ] && rm -rf "$1"
+    }
+}
+
 cdls () {
     builtin cd "$1" && ls
 }

@@ -8,16 +8,16 @@ which git &> /dev/null || {
     exit 1
 }
 
-if [ -d $DOT_DIR ]; then
+[ -d $DOT_DIR ] && {
     cd $HOME
     rm -rf $DOT_DIR
-fi
+}
 
-git clone $GIT_REPO $DOT_DIR || exit $?
+git clone $GIT_REPO $DOT_DIR || exit
 cd $DOT_DIR
 
 for f in .??*
 do
-    [[ "$f" == '.git' ]] && continue
+    [[ "$f" = '.git' ]] && continue
     ln -sfv "$DOT_DIR/$f" "$HOME/$f"
 done
