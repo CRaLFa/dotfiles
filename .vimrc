@@ -73,7 +73,7 @@ let g:winresizer_horiz_resize = 1
 let g:previm_open_cmd = '/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
 let g:previm_wsl_mode = 1
 let g:previm_disable_default_css = 0
-let g:previm_custom_css_path = s:dot_dir . '/vim/markdown.css'
+let g:previm_custom_css_path = s:dot_dir .. '/vim/markdown.css'
 
 " vim-lsp settings
 let g:lsp_diagnostics_enabled = 1
@@ -112,7 +112,7 @@ endif
 
 " Install plugins using dein.vim
 let s:dein_dir = expand('~/.cache/dein')
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+let s:dein_repo_dir = s:dein_dir .. '/repos/github.com/Shougo/dein.vim'
 
 if !isdirectory(s:dein_dir)
   call mkdir(s:dein_dir, 'p')
@@ -123,13 +123,13 @@ if &runtimepath !~# '/dein.vim'
     execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
   endif
 
-  execute 'set runtimepath^=' . s:dein_repo_dir
+  execute 'set runtimepath^=' .. s:dein_repo_dir
 endif
 
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  let s:toml = s:dot_dir . '/vim/dein.toml'
+  let s:toml = s:dot_dir .. '/vim/dein.toml'
   if filereadable(s:toml)
     call dein#load_toml(s:toml, { 'lazy': 0 })
   endif

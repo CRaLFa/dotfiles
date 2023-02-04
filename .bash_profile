@@ -1,3 +1,4 @@
+[ -f ~/.git-prompt.sh ] && . ~/.git-prompt.sh
 [ -f ~/.bashrc ] && . ~/.bashrc
 
 umask 022
@@ -16,7 +17,7 @@ PATH="$GOPATH/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 PATH="$DENO_INSTALL/bin:$PATH"
-PATH="/usr/local/zig-linux-x86_64-0.10.0:$PATH"
+PATH="/usr/local/zig:$PATH"
 export PATH
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
