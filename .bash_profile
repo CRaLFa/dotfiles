@@ -12,7 +12,6 @@ export TEXTIMG_EMOJI_DIR='/usr/local/src/noto-emoji/png/512'
 export DENO_INSTALL="$HOME/.deno"
 
 PATH="$HOME/.nodebrew/current/bin:$PATH"
-PATH="/opt/certbot:$PATH"
 PATH="$GOPATH/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
