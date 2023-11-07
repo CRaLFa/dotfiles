@@ -38,6 +38,7 @@
     s = status
     sd = stash drop
     sl = stash list
+    sm = !git stash push -u && git merge && git stash pop
     sp = stash pop
     ss = stash push
     sw = switch

@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-which git &> /dev/null || {
-    echo 'Please install git.' >&2
-    exit 1
-}
-
 readonly DOT_DIR="$HOME/.dotfiles"
 readonly GIT_REPO='https://github.com/CRaLFa/dotfiles.git'
 
 main () {
+    which git &> /dev/null || {
+        echo 'Please install git.' >&2
+        return 1
+    }
+
     [ -d "$DOT_DIR" ] && {
         cd "$HOME"
         rm -rf "$DOT_DIR"
