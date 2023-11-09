@@ -10,6 +10,8 @@ export EDITOR='/usr/bin/vim'
 export GOPATH="$HOME/go"
 export TEXTIMG_EMOJI_DIR='/usr/local/src/noto-emoji/png/512'
 export DENO_INSTALL="$HOME/.deno"
+export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
+export ANDROID_HOME='/usr/local/android/sdk'
 
 PATH="$HOME/.nodebrew/current/bin:$PATH"
 PATH="$GOPATH/bin:$PATH"
@@ -17,6 +19,9 @@ PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 PATH="$DENO_INSTALL/bin:$PATH"
 PATH="/usr/local/zig:$PATH"
+PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+PATH="$ANDROID_HOME/platform-tools:$PATH"
+PATH="/usr/local/flutter/bin:$PATH"
 export PATH
 
 export SDKMAN_DIR="$HOME/.sdkman"

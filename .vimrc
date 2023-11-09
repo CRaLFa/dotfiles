@@ -73,7 +73,7 @@ let g:winresizer_horiz_resize = 1
 let g:previm_open_cmd = '/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
 let g:previm_wsl_mode = 1
 let g:previm_disable_default_css = 0
-let g:previm_custom_css_path = s:dot_dir .. '/vim/markdown.css'
+let g:previm_custom_css_path = s:dot_dir .. '/vim/previm.css'
 
 " vim-lsp settings
 let g:lsp_diagnostics_enabled = 1
