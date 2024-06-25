@@ -1,9 +1,9 @@
 alias ..='cd ..'
-# alias cd='cdls'
 alias cl='clear && clear'
 alias funcs='type $(grep -Po "^\w+(?= \(\))" ~/.bashrc)'
 alias ins='sudo apt -y install'
 alias insed='apt list --installed 2> /dev/null | grep -v "自動" | cut -d "/" -f 1'
+alias ipv4='ip a | grep eth0 | grep -Po "inet\s\K[\d.]+"'
 alias less='less -ix 4'
 alias ll.='ll -d .??*'
 alias ll='ls -lh'
@@ -17,7 +17,7 @@ alias vig='vi ~/.gitconfig'
 alias viv='vi ~/.vimrc'
 
 md () {
-    mkdir "$1" && builtin cd $_
+    mkdir "$1" && builtin cd "$_"
 }
 
 rd () {
@@ -31,8 +31,77 @@ rd () {
     }
 }
 
-cdls () {
-    builtin cd "$1" && ls
+repeat () {
+    yes "$1" | head -n $2 | paste -sd ''
+}
+
+format_number () {
+    perl -pe 's/\d(?=(\d{3})+$)/$&,/g' <<< "$1"
+}
+
+ex_norm () {
+    ex -s +"norm! $@" +'%p|q!' /dev/stdin
+}
+
+commands () {
+    (( $# < 1 )) && {
+        echo 'Usage: commands APT_PACKAGE_NAME' >&2
+        return 1
+    }
+    local bins="$(dpkg -L "$1" | grep -P '(/usr)*/(s?bin|games)/')"
+    [ -n "$bins" ] && xargs basename -a <<< "$bins" | sort | uniq
+}
+
+get_certificate () {
+    openssl s_client -connect "${1}:443" < /dev/null 2> /dev/null | openssl x509 -text -noout
+}
+
+rand () {
+    local -i num=$1
+    echo $(( num == 0 ? RANDOM : RANDOM % num ))
+}
+
+256colors () {
+    seq 0 255 | xargs -I @ -P 0 printf '\e[38;5;@m %3d' @
+    echo
+    seq 0 255 | xargs -I @ -P 0 printf '\e[48;5;@m %3d' @
+    echo -e '\e[0m'
+}
+
+kaomoji () {
+    echo -e "$(printf '\\U1F6%02X' {0..79})"
+}
+
+emoji () {
+    echo -e "$(printf '\\U1F%3X' {768..1535})"
+}
+
+unicode () {
+    printf '%04X\n' {32..65535} | xargs -I @ -P 0 echo 'echo -e "U+@: \u@"' | bash
+    printf '%5X\n' {65536..129791} | xargs -I @ -P 0 echo 'echo -e "U+@: \U@"' | bash
+}
+
+nanikiru () {
+    shuf -e {0..33}{,,,} \
+        | head -n 14 \
+        | awk '{ print ($1 < 7) ? $1 + 34 : $1 }' \
+        | sort -n \
+        | awk '{ print ($1 > 33) ? $1 - 34 : $1 }' \
+        | xargs printf '\\U1F0%02X' \
+        | echo -e "$(cat)"
+}
+
+multiplication_table () {
+    local -i max="$1" i j
+    local -i square=$(( max ** 2 ))
+    for i in $(seq $max)
+    do
+        for j in $(seq $max)
+        do
+            printf "%${#square}d " $(( i * j ))
+        done
+        echo
+    done
 }
 
 ##########################################################################

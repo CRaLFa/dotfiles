@@ -8,9 +8,11 @@ export PS3='Please input NUMBER. > '
 export LANG='ja_JP.UTF-8'
 export EDITOR='/usr/bin/vim'
 export GOPATH="$HOME/go"
-export TEXTIMG_EMOJI_DIR='/usr/local/src/noto-emoji/png/512'
+export TEXTIMG_FONT_FILE='/usr/share/fonts/truetype/noto/NotoSansMono-Regular.ttf'
+export TEXTIMG_EMOJI_DIR='/usr/share/fonts/noto-emoji/png/512'
 export DENO_INSTALL="$HOME/.deno"
-export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
+export SDKMAN_DIR="$HOME/.sdkman"
+export JAVA_HOME="$SDKMAN_DIR/candidates/java/current"
 export ANDROID_HOME='/usr/local/android/sdk'
 
 PATH="$HOME/.nodebrew/current/bin:$PATH"
@@ -24,5 +26,4 @@ PATH="$ANDROID_HOME/platform-tools:$PATH"
 PATH="/usr/local/flutter/bin:$PATH"
 export PATH
 
-export SDKMAN_DIR="$HOME/.sdkman"
-[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ] && . "$HOME/.sdkman/bin/sdkman-init.sh"
+[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && . "$SDKMAN_DIR/bin/sdkman-init.sh"
