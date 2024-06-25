@@ -13,7 +13,7 @@
 [alias]
     a = "!f(){ git add $@ && git status; }; f"
     aa = !git add -A && git status
-    al = !git config --global --list | grep alias | sort
+    al = !git config --global -l | grep '^alias' | sort
     au = !git add -u && git status
     b = branch
     bu = !git branch --unset-upstream && git status
@@ -38,7 +38,7 @@
     s = status
     sd = stash drop
     sl = stash list
-    sm = !git stash push -u && git merge && git stash pop
+    sm = !git stash push && git merge && git stash pop
     sp = stash pop
     ss = stash push
     sw = switch
