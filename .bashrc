@@ -17,7 +17,7 @@ alias vig='vi ~/.gitconfig'
 alias viv='vi ~/.vimrc'
 
 md () {
-    mkdir "$1" && builtin cd "$_"
+    mkdir "$1" && cd "$_"
 }
 
 rd () {
@@ -40,7 +40,7 @@ format_number () {
 }
 
 ex_norm () {
-    ex -s +"norm! $@" +'%p|q!' /dev/stdin
+    ex -s +"norm! $@" +'%|q!' /dev/stdin
 }
 
 commands () {
