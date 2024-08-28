@@ -1,44 +1,47 @@
 [core]
-    pager = less -SFXni -x4
-    editor = vim
-    autocrlf = false
-    ignorecase = false
-    quotepath = false
+	pager = less -SFXni -x4
+	editor = vim
+	autocrlf = false
+	ignorecase = false
+	quotepath = false
 [pull]
-    rebase = false
+	rebase = false
 [fetch]
-    prune = false
+	prune = false
 [rebase]
-    autoStash = false
+	autoStash = false
 [alias]
-    a = "!f(){ git add $@ && git status; }; f"
-    aa = !git add -A && git status
-    al = !git config --global -l | grep '^alias' | sort
-    au = !git add -u && git status
-    b = branch
-    bu = !git branch --unset-upstream && git status
-    ca = !git commit --amend --date=\"$(date -R)\"
-    cg = config --global
-    cm = commit
-    co = checkout
-    cp = cherry-pick
-    d = diff
-    dc = diff --cached
-    f = fetch -p origin
-    fm = fetch origin master:master
-    ignore = !git rm -r --cached . && git add -A && git status
-    ll = log --oneline --graph --decorate=full
-    lla = log --oneline --graph --decorate=full --all
-    pf = push -f
-    po = !git push -u origin $(git rev-parse --abbrev-ref @)
-    rb = rebase
-    rh1 = reset @~
-    rs = "!f(){ git restore $@ && git status; }; f"
-    rss = "!f(){ git restore -S $@ && git status; }; f"
-    s = status
-    sd = stash drop
-    sl = stash list
-    sm = !git stash push && git merge && git stash pop
-    sp = stash pop
-    ss = stash push
-    sw = switch
+	a = "!f(){ git add $@ && git status; }; f"
+	aa = !git add -A && git status
+	al = !git config --global -l | grep '^alias' | sort
+	au = !git add -u && git status
+	b = branch
+	bu = !git branch --unset-upstream && git status
+	ca = !git commit --amend --date=\"$(date -R)\"
+	cg = config --global
+	cm = commit
+	co = checkout
+	cp = cherry-pick
+	d = diff
+	dc = diff --cached
+	f = fetch -p origin
+	fm = fetch origin master:master
+	ignore = !git rm -r --cached . && git add -A && git status
+	ll = log --oneline --graph --decorate=full
+	lla = log --oneline --graph --decorate=full --all
+	pf = push -f
+	po = !git push -u origin $(git rev-parse --abbrev-ref @)
+	rb = rebase
+	rh1 = reset @~
+	rs = "!f(){ git restore $@ && git status; }; f"
+	rss = "!f(){ git restore -S $@ && git status; }; f"
+	s = status
+	sd = stash drop
+	sl = stash list
+	sm = !git stash push && git merge && git stash pop
+	sp = stash pop
+	ss = stash push
+	sw = switch
+[user]
+	email = minami.smd@gmail.com
+	name = CRaLFa
