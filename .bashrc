@@ -40,7 +40,7 @@ format_number () {
 }
 
 ex_norm () {
-    ex -s +"norm! $@" +'%|q!' /dev/stdin
+    ex -s +"norm! $*" +'%|q!' /dev/stdin
 }
 
 commands () {
@@ -102,6 +102,17 @@ multiplication_table () {
         done
         echo
     done
+}
+
+# For WSL
+[[ "$(uname -r)" == *WSL* ]] && {
+	alias clip='clip.exe'
+	alias ps1='powershell.exe'
+	alias pst='powershell.exe -Command Get-Clipboard'
+
+	explore () {
+		explorer.exe /e,"$(wslpath -wa "${1:-.}")"
+	}
 }
 
 ##########################################################################
