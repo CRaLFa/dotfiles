@@ -42,3 +42,9 @@ repo = 'mattn/vim-goimports'
 
 [[plugins]]
 repo = 'mattn/vim-maketable'
+
+[[plugins]]
+repo = 'tyru/caw.vim'
+
+[[plugins]]
+repo = 'mattn/emmet-vim'

@@ -89,6 +89,9 @@ let g:asyncomplete_popup_delay = 200
 let g:img_search_max_width = 768
 let g:img_search_max_height = 432
 
+" vim-goimports settings
+let g:goimports_simplify = 1
+
 " cursor style settings
 let &t_SI = "\e[5 q"
 let &t_EI = "\e[5 q"
