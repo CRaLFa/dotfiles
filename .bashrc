@@ -115,6 +115,20 @@ multiplication_table () {
 	explore () {
 		explorer.exe /e,"$(wslpath -wa "${1:-.}")"
 	}
+
+	cpl () {
+		local item
+		if (( $# < 1 )); then
+			select item in $(find /mnt/c/Windows/system32/ -maxdepth 1 -name '*.cpl' | xargs basename -s '.cpl')
+			do
+				[ -n "$item" ] && break
+				echo "Invalid input: $REPLY" >&2
+			done
+		else
+			item="$1"
+		fi
+		control.exe "${item}.cpl"
+	}
 }
 
 ##########################################################################
