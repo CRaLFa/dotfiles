@@ -2,7 +2,7 @@ alias ..='cd ..'
 alias cl='clear && clear'
 alias clock='watch -n 1 "date +\"%Y/%m/%d %H:%M:%S\" | figlet -f big"'
 alias conoha='tmux new-session -s conoha ssh conoha'
-alias funcs='type $(grep -Po "^\w+(?= \(\))" ~/.bashrc)'
+alias funcs='type $(grep -Po "^\s*\w+(?= \(\))" ~/.bashrc)'
 alias ins='sudo apt -y install'
 alias insed='apt list --installed 2> /dev/null | grep -v "自動" | cut -d "/" -f 1'
 alias ipv4='ip a | grep eth0 | grep -Po "inet\s\K[\d.]+"'
@@ -51,7 +51,7 @@ commands () {
         return 1
     }
     local bins="$(dpkg -L "$1" | grep -P '(/usr)*/(s?bin|games)/')"
-    [ -n "$bins" ] && xargs basename -a <<< "$bins" | sort | uniq
+    [ -n "$bins" ] && echo "$bins" | xargs basename -a | sort | uniq
 }
 
 get_certificate () {
