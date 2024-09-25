@@ -1,3 +1,6 @@
+[ -s "$HOME/.git-prompt.sh" ] && . "$HOME/.git-prompt.sh"
+[ -s "$HOME/.bashrc" ] && . "$HOME/.bashrc"
+
 umask 022
 
 export PS1='\n\[\e[32m\]\u@\h \[\e[35m\]\s \[\e[33m\]\w\[\e[36m\]$(__git_ps1) \[\e[0m\][$(date "+%Y/%m/%d %H:%M:%S")]\n$ '
@@ -24,7 +27,5 @@ PATH="/usr/local/flutter/bin:$PATH"
 PATH="$DPRINT_INSTALL/bin:$PATH"
 export PATH
 
-[ -s "$HOME/.git-prompt.sh" ] && . "$HOME/.git-prompt.sh"
-[ -s "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && . "$SDKMAN_DIR/bin/sdkman-init.sh"
 [ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
