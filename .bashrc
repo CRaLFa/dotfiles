@@ -129,6 +129,13 @@ multiplication_table () {
 		fi
 		control.exe "${item}.cpl"
 	}
+
+	go_coverage () {
+		local out=$(mktemp) html
+		go test -coverprofile="$out" || return
+		html=$(go tool cover -html="$out" |& rev | cut -d ' ' -f 1 | rev) || return
+		powershell.exe -Command "Start-Process chrome.exe $(wslpath -wa "$html")"
+	}
 }
 
 ##########################################################################
