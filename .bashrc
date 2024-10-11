@@ -1,6 +1,6 @@
 alias ..='cd ..'
 alias cl='clear && clear'
-alias clock='watch -n 1 "date +\"%Y/%m/%d %H:%M:%S\" | figlet -f big"'
+alias clock='watch -n 1 "date +\"%Y/%m/%dT%H:%M:%S\" | tr "T" "\\\\n" | figlet -f big"'
 alias conoha='tmux new-session -s conoha ssh conoha'
 alias funcs='type $(grep -Po "^\s*\w+(?= \(\))" ~/.bashrc)'
 alias ins='sudo apt -y install'
