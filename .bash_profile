@@ -8,13 +8,15 @@ export PS3='Please input NUMBER. > '
 export LANG='ja_JP.UTF-8'
 export EDITOR='/usr/bin/vim'
 export GOPATH="$HOME/go"
-export TEXTIMG_FONT_FILE='/usr/share/fonts/truetype/noto/NotoSansMono-Regular.ttf'
+export TEXTIMG_FONT_FILE='/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'
 export TEXTIMG_EMOJI_DIR='/usr/share/fonts/noto-emoji/png/512'
 export DENO_INSTALL="$HOME/.deno"
 export SDKMAN_DIR="$HOME/.sdkman"
 export JAVA_HOME="$SDKMAN_DIR/candidates/java/current"
 export ANDROID_HOME='/usr/local/android/sdk'
 export DPRINT_INSTALL="$HOME/.dprint"
+export LD_PRELOAD="/usr/local/lib/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
+export STDERRED_ESC_CODE=$(tput setaf 9)
 
 PATH="$HOME/.nodebrew/current/bin:$PATH"
 PATH="$GOPATH/bin:$PATH"
