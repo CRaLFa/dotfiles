@@ -15,8 +15,8 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export JAVA_HOME="$SDKMAN_DIR/candidates/java/current"
 export ANDROID_HOME='/usr/local/android/sdk'
 export DPRINT_INSTALL="$HOME/.dprint"
-export LD_PRELOAD="/usr/local/lib/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
-export STDERRED_ESC_CODE=$(tput setaf 9)
+# export LD_PRELOAD="/usr/local/lib/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
+# export STDERRED_ESC_CODE=$(tput setaf 9)
 
 PATH="$HOME/.nodebrew/current/bin:$PATH"
 PATH="$GOPATH/bin:$PATH"
