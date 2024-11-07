@@ -15,8 +15,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export JAVA_HOME="$SDKMAN_DIR/candidates/java/current"
 export ANDROID_HOME='/usr/local/android/sdk'
 export DPRINT_INSTALL="$HOME/.dprint"
-# export LD_PRELOAD="/usr/local/lib/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
-# export STDERRED_ESC_CODE=$(tput setaf 9)
 export BUN_INSTALL="$HOME/.bun"
 
 PATH="$HOME/.nodebrew/current/bin:$PATH"
@@ -33,3 +31,8 @@ export PATH
 
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && . "$SDKMAN_DIR/bin/sdkman-init.sh"
 [ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+[ -f '/usr/local/lib/libstderred.so' ] && {
+	export LD_PRELOAD="/usr/local/lib/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
+	export STDERRED_ESC_CODE=$(tput setaf 9)
+}
