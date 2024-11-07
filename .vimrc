@@ -8,7 +8,7 @@ set clipboard=unnamed,unnamedplus
 set completeopt=menu,noinsert,noselect,preview
 set cursorline
 set display=lastline
-set expandtab
+set noexpandtab
 set helpheight=999
 set helplang=ja
 set hlsearch

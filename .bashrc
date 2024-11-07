@@ -41,6 +41,10 @@ format_number () {
     perl -pe 's/\d(?=(\d{3})+$)/$&,/g' <<< "$1"
 }
 
+cc () {
+	echo -n "$1" | wc -c
+}
+
 ex_norm () {
     ex -s +"norm! $*" +'%|q!' /dev/stdin
 }
