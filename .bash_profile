@@ -17,6 +17,7 @@ export ANDROID_HOME='/usr/local/android/sdk'
 export DPRINT_INSTALL="$HOME/.dprint"
 # export LD_PRELOAD="/usr/local/lib/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
 # export STDERRED_ESC_CODE=$(tput setaf 9)
+export BUN_INSTALL="$HOME/.bun"
 
 PATH="$HOME/.nodebrew/current/bin:$PATH"
 PATH="$GOPATH/bin:$PATH"
@@ -27,6 +28,7 @@ PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
 PATH="$ANDROID_HOME/platform-tools:$PATH"
 PATH="/usr/local/flutter/bin:$PATH"
 PATH="$DPRINT_INSTALL/bin:$PATH"
+PATH="$BUN_INSTALL/bin:$PATH"
 export PATH
 
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && . "$SDKMAN_DIR/bin/sdkman-init.sh"
