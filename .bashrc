@@ -20,26 +20,26 @@ alias vig='vi ~/.gitconfig'
 alias viv='vi ~/.vimrc'
 
 md () {
-    mkdir "$1" && cd "$_"
+	mkdir "$1" && cd "$_"
 }
 
 rd () {
-    [ -d "$1" ] || {
-        echo "Error: Directory '$1' doesn't exist." >&2
-        return 1
-    }
-    rmdir "$1" 2> /dev/null || {
-        read -p "Remove non-empty directory '$1'? [y/N]: " answer
-        [ "$answer" = 'y' ] && rm -rf "$1"
-    }
+	[ -d "$1" ] || {
+		echo "Error: Directory '$1' doesn't exist." >&2
+		return 1
+	}
+	rmdir "$1" 2> /dev/null || {
+		read -p "Remove non-empty directory '$1'? [y/N]: " answer
+		[ "$answer" = 'y' ] && rm -rf "$1"
+	}
 }
 
 repeat () {
-    yes "$1" | head -n $2 | paste -sd ''
+	yes "$1" | head -n $2 | paste -sd ''
 }
 
 format_number () {
-    perl -pe 's/\d(?=(\d{3})+$)/$&,/g' <<< "$1"
+	perl -pe 's/\d(?=(\d{3})+$)/$&,/g' <<< "$1"
 }
 
 cc () {
@@ -47,68 +47,68 @@ cc () {
 }
 
 ex_norm () {
-    ex -s +"norm! $*" +'%|q!' /dev/stdin
+	ex -s +"norm! $*" +'%|q!' /dev/stdin
 }
 
 commands () {
-    (( $# < 1 )) && {
-        echo 'Usage: commands APT_PACKAGE_NAME' >&2
-        return 1
-    }
-    local bins="$(dpkg -L "$1" | grep -P '(/usr)*/(s?bin|games)/')"
-    [ -n "$bins" ] && echo "$bins" | xargs basename -a | sort | uniq
+	(( $# < 1 )) && {
+		echo 'Usage: commands APT_PACKAGE_NAME' >&2
+		return 1
+	}
+	local bins="$(dpkg -L "$1" | grep -P '(/usr)*/(s?bin|games)/')"
+	[ -n "$bins" ] && echo "$bins" | xargs basename -a | sort | uniq
 }
 
 get_certificate () {
-    openssl s_client -connect "${1}:443" < /dev/null 2> /dev/null | openssl x509 -text -noout
+	openssl s_client -connect "${1}:443" < /dev/null 2> /dev/null | openssl x509 -text -noout
 }
 
 rand () {
-    local -i num=$1
-    echo $(( num == 0 ? RANDOM : RANDOM % num ))
+	local -i num=$1
+	echo $(( num == 0 ? RANDOM : RANDOM % num ))
 }
 
 256colors () {
-    seq 0 255 | xargs -I @ -P 0 printf '\e[38;5;@m %3d' @
-    echo
-    seq 0 255 | xargs -I @ -P 0 printf '\e[48;5;@m %3d' @
-    echo -e '\e[0m'
+	seq 0 255 | xargs -I @ -P 0 printf '\e[38;5;@m %3d' @
+	echo
+	seq 0 255 | xargs -I @ -P 0 printf '\e[48;5;@m %3d' @
+	echo -e '\e[0m'
 }
 
 kaomoji () {
-    echo -e "$(printf '\\U1F6%02X' {0..79})"
+	echo -e "$(printf '\\U1F6%02X' {0..79})"
 }
 
 emoji () {
-    echo -e "$(printf '\\U1F%3X' {768..1535})"
+	echo -e "$(printf '\\U1F%3X' {768..1535})"
 }
 
 unicode () {
-    printf '%04X\n' {32..65535} | xargs -I @ -P 0 echo 'echo -e "U+@: \u@"' | bash
-    printf '%5X\n' {65536..129791} | xargs -I @ -P 0 echo 'echo -e "U+@: \U@"' | bash
+	printf '%04X\n' {32..65535} | xargs -I @ -P 0 echo 'echo -e "U+@: \u@"' | bash
+	printf '%5X\n' {65536..129791} | xargs -I @ -P 0 echo 'echo -e "U+@: \U@"' | bash
 }
 
 nanikiru () {
-    shuf -e {0..33}{,,,} \
-        | head -n 14 \
-        | awk '{ print ($1 < 7) ? $1 + 34 : $1 }' \
-        | sort -n \
-        | awk '{ print ($1 > 33) ? $1 - 34 : $1 }' \
-        | xargs printf '\\U1F0%02X' \
-        | echo -e "$(cat)"
+	shuf -e {0..33}{,,,} \
+		| head -n 14 \
+		| awk '{ print ($1 < 7) ? $1 + 34 : $1 }' \
+		| sort -n \
+		| awk '{ print ($1 > 33) ? $1 - 34 : $1 }' \
+		| xargs printf '\\U1F0%02X' \
+		| echo -e "$(cat)"
 }
 
 multiplication_table () {
-    local -i max="$1" i j
-    local -i square=$(( max ** 2 ))
-    for i in $(seq $max)
-    do
-        for j in $(seq $max)
-        do
-            printf "%${#square}d " $(( i * j ))
-        done
-        echo
-    done
+	local -i max="$1" i j
+	local -i square=$(( max ** 2 ))
+	for i in $(seq $max)
+	do
+		for j in $(seq $max)
+		do
+			printf "%${#square}d " $(( i * j ))
+		done
+		echo
+	done
 }
 
 # For WSL
@@ -151,8 +151,8 @@ multiplication_table () {
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+	*i*) ;;
+	  *) return;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -179,12 +179,12 @@ shopt -s checkwinsize
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+	debian_chroot=$(cat /etc/debian_chroot)
 fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+	xterm-color|*-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -193,42 +193,42 @@ esac
 #force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    # We have color support; assume it's compliant with Ecma-48
-    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-    # a case would tend to support setf rather than setaf.)
-    color_prompt=yes
-    else
-    color_prompt=
-    fi
+	if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+	else
+	color_prompt=
+	fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+	PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
+	PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+	;;
 *)
-    ;;
+	;;
 esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    # alias ls='ls --color=auto'
-    # alias dir='dir --color=auto'
-    # alias vdir='vdir --color=auto'
+	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+	# alias ls='ls --color=auto'
+	# alias dir='dir --color=auto'
+	# alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    # alias fgrep='fgrep --color=auto'
-    # alias egrep='egrep --color=auto'
+	alias grep='grep --color=auto'
+	# alias fgrep='fgrep --color=auto'
+	# alias egrep='egrep --color=auto'
 fi
 
 # colored GCC warnings and errors
@@ -240,7 +240,7 @@ fi
 # alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
+#	sleep 10; alert
 # alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
@@ -249,7 +249,7 @@ fi
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+	. ~/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -257,8 +257,8 @@ fi
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
+	. /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
+	. /etc/bash_completion
   fi
 fi

@@ -1,31 +1,31 @@
 body {
-    background-color: #282a36;
-    color: #ffffff;
+	background-color: #282a36;
+	color: #ffffff;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: inherit;
+	color: inherit;
 }
 
 a {
-    color: #59acf3;
+	color: #59acf3;
 }
 
 pre {
-    background-color: inherit;
+	background-color: inherit;
 }
 
 code {
-    background-color: inherit;
-    border: none;
-    padding: 0;
+	background-color: inherit;
+	border: none;
+	padding: 0;
 }
 
 .hljs {
-    background-color: inherit;
-    color: inherit;
+	background-color: inherit;
+	color: inherit;
 }
 
 [class^="hljs-"] {
-    color: inherit;
+	color: inherit;
 }
