@@ -45,3 +45,7 @@
 [user]
 	email = minami.smd@gmail.com
 	name = CRaLFa
+[includeIf "gitdir:~/repo/private/"]
+	path = ~/repo/private/.gitconfig
+[includeIf "gitdir:~/repo/work/"]
+	path = ~/repo/work/.gitconfig
