@@ -28,9 +28,11 @@ rd () {
 		echo "Error: Directory '$1' doesn't exist." >&2
 		return 1
 	}
-	rmdir "$1" 2> /dev/null || {
-		read -p "Remove non-empty directory '$1'? [y/N]: " answer
-		[ "$answer" = 'y' ] && rm -rf "$1"
+	local s=''
+	[ -w "$1" ] || s='sudo'
+	eval "$s" rmdir "$1" 2> /dev/null || {
+		read -rp "Remove non-empty directory '$1' ? [y/N]: " answer
+		[ "$answer" = 'y' ] && eval "$s" rm -rf "$1"
 	}
 }
 
