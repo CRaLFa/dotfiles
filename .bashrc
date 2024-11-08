@@ -113,12 +113,16 @@ multiplication_table () {
 
 # For WSL
 [[ "$(uname -r)" == *WSL* ]] && {
-	alias clip='clip.exe'
 	alias ps1='powershell.exe'
 	alias pst='powershell.exe -Command Get-Clipboard'
 
 	explore () {
 		explorer.exe /e,"$(wslpath -wa "${1:-.}")"
+	}
+
+	clip () {
+		local file=${1:-/dev/stdin}
+		nkf -Ws < "$file" | clip.exe
 	}
 
 	cpl () {
