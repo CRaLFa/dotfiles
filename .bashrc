@@ -70,13 +70,6 @@ rand () {
 	echo $(( num == 0 ? RANDOM : RANDOM % num ))
 }
 
-256colors () {
-	seq 0 255 | xargs -I @ -P 0 printf '\e[38;5;@m %3d' @
-	echo
-	seq 0 255 | xargs -I @ -P 0 printf '\e[48;5;@m %3d' @
-	echo -e '\e[0m'
-}
-
 kaomoji () {
 	echo -e "$(printf '\\U1F6%02X' {0..79})"
 }
