@@ -125,9 +125,7 @@ multiplication_table () {
 			echo 'gsudo is required' >&2
 			return
 		}
-		local target name
-		target="$(wslpath -wa "$1")"
-		name="$(wslpath -wa "$2")"
+		local target="$(wslpath -wa "$1")" name="$(wslpath -wa "$2")"
 		gsudo powershell.exe -Command "New-Item -ItemType SymbolicLink -Path $name -Target $target"
 	}
 
