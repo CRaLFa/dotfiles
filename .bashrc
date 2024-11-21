@@ -116,8 +116,19 @@ multiplication_table () {
 	}
 
 	clip () {
-		local file=${1:-/dev/stdin}
-		nkf -Ws < "$file" | clip.exe
+		local file="${1:-/dev/stdin}"
+		nkf -s < "$file" | clip.exe
+	}
+
+	lns () {
+		which gsudo &> /dev/null || {
+			echo 'gsudo is required' >&2
+			return
+		}
+		local target name
+		target="$(wslpath -wa "$1")"
+		name="$(wslpath -wa "$2")"
+		gsudo powershell.exe -Command "New-Item -ItemType SymbolicLink -Path $name -Target $target"
 	}
 
 	cpl () {
