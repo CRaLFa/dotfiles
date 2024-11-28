@@ -20,6 +20,7 @@ alias vig='vi ~/.gitconfig'
 alias viv='vi ~/.vimrc'
 
 md () {
+	(( $# < 1 )) && return 1
 	mkdir "$1" && cd "$_"
 }
 
@@ -37,15 +38,19 @@ rd () {
 }
 
 repeat () {
+	(( $# < 2 )) && return 1
 	yes "$1" | head -n $2 | paste -sd ''
 }
 
 format_number () {
+	(( $# < 1 )) && return 1
 	perl -pe 's/\d(?=(\d{3})+$)/$&,/g' <<< "$1"
 }
 
 cc () {
-	echo -n "$1" | wc -c
+	local s="$1"
+	[ -z "$s" ] && s=$(cat)
+	echo -n "$s" | wc -c
 }
 
 ex_norm () {
@@ -121,12 +126,18 @@ multiplication_table () {
 	}
 
 	lns () {
+		(( $# < 2 )) && return 1
 		which gsudo &> /dev/null || {
 			echo 'gsudo is required' >&2
 			return
 		}
 		local target="$(wslpath -wa "$1")" name="$(wslpath -wa "$2")"
 		gsudo powershell.exe -Command "New-Item -ItemType SymbolicLink -Path $name -Target $target"
+	}
+
+	open_chrome () {
+		(( $# < 1 )) && return 1
+		powershell.exe -Command "Start-Process chrome.exe $(wslpath -wa "$1")"
 	}
 
 	cpl () {
@@ -147,7 +158,7 @@ multiplication_table () {
 		local out=$(mktemp) html
 		go test -coverprofile="$out" || return
 		html=$(go tool cover -html="$out" |& rev | cut -d ' ' -f 1 | rev) || return
-		powershell.exe -Command "Start-Process chrome.exe $(wslpath -wa "$html")"
+		open_chrome "$html"
 	}
 }
 
