@@ -18,6 +18,7 @@
 	b = branch
 	bu = !git branch --unset-upstream && git status
 	ca = !git commit --amend --date=\"$(date -R)\"
+	cd = clone --depth 1
 	cg = config --global
 	cm = commit
 	co = checkout
