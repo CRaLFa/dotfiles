@@ -16,8 +16,10 @@ export JAVA_HOME="$SDKMAN_DIR/candidates/java/current"
 export ANDROID_HOME='/usr/local/android/sdk'
 export DPRINT_INSTALL="$HOME/.dprint"
 export BUN_INSTALL="$HOME/.bun"
+export VOLTA_HOME="$HOME/.volta"
+export MNEMONIC='intact unique level churn manual ignore siege throw super bring enter hundred'
+# export MNEMONIC='shoe agent crazy similar execute wood rare mystery among floor guitar key'
 
-PATH="$HOME/.nodebrew/current/bin:$PATH"
 PATH="$GOPATH/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
 PATH="$DENO_INSTALL/bin:$PATH"
@@ -27,6 +29,7 @@ PATH="$ANDROID_HOME/platform-tools:$PATH"
 PATH="/usr/local/flutter/bin:$PATH"
 PATH="$DPRINT_INSTALL/bin:$PATH"
 PATH="$BUN_INSTALL/bin:$PATH"
+PATH="$VOLTA_HOME/bin:$PATH"
 export PATH
 
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && . "$SDKMAN_DIR/bin/sdkman-init.sh"
