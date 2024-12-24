@@ -42,6 +42,11 @@ repeat () {
 	yes "$1" | head -n $2 | paste -sd ''
 }
 
+remove_docker_image () {
+	(( $# < 1 )) && return 1
+	docker images | grep "$1" | sed -E 's/\s+/\t/g' | cut -f 3 | xargs docker rmi -f
+}
+
 format_number () {
 	(( $# < 1 )) && return 1
 	perl -pe 's/\d(?=(\d{3})+$)/$&,/g' <<< "$1"
