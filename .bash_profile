@@ -39,3 +39,5 @@ export PATH
 	export LD_PRELOAD="/usr/local/lib/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
 	export STDERRED_ESC_CODE="$(tput setaf 224)"
 }
+
+[ -x '/usr/local/bin/aws_completer' ] && complete -C '/usr/local/bin/aws_completer' aws
