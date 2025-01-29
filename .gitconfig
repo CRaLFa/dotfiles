@@ -43,6 +43,7 @@
 	sp = stash pop
 	ss = stash push
 	sw = switch
+	mn = merge --no-ff
 [user]
 	email = minami.smd@gmail.com
 	name = CRaLFa
