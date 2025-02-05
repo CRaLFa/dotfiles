@@ -38,6 +38,17 @@ rd () {
 	}
 }
 
+mt () {
+	(( $# < 1 )) && return 1
+	local d
+	d=$(dirname "$1")
+	[ -d "$d" ] || mkdir -p "$d" || {
+		echo 'Failed to make directory.' >&2
+		return 1
+	}
+	touch "$1"
+}
+
 repeat () {
 	(( $# < 2 )) && return 1
 	yes "$1" | head -n $2 | paste -sd ''
