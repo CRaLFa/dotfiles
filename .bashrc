@@ -54,9 +54,8 @@ repeat () {
 	yes "$1" | head -n $2 | paste -sd ''
 }
 
-remove_docker_image () {
-	(( $# < 1 )) && return 1
-	docker images | grep "$1" | sed -E 's/\s+/\t/g' | cut -f 3 | xargs docker rmi -f
+remove_dangling_images () {
+	docker rmi $(docker images -f 'dangling=true' -q)
 }
 
 format_number () {
