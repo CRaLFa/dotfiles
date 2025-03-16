@@ -13,7 +13,7 @@ alias ll='ls -lh'
 alias lla='ll -A'
 alias ls='ls -F --color=auto'
 alias reload='exec bash -l'
-alias tree='tree -Aa -I .git -I node_modules'
+alias tree='tree -AaI ".git|node_modules"'
 alias update='sudo apt update && sudo apt -y upgrade && sudo apt -y autoremove'
 alias vibp='vi ~/.bash_profile'
 alias vibr='vi ~/.bashrc'
@@ -56,6 +56,11 @@ repeat () {
 
 remove_dangling_images () {
 	docker rmi $(docker images -f 'dangling=true' -q)
+}
+
+bcrypt () {
+	(( $# < 1 )) && return 1
+	htpasswd -nbB '' "$1" | cut -d : -f 2 | tr -d '\n'
 }
 
 format_number () {
