@@ -13,7 +13,7 @@
 [alias]
 	a = "!f(){ git add $@ && git status; }; f"
 	aa = !git add -A && git status
-	al = !git config --global -l | grep '^alias' | sort
+	al = !git config -l | grep '^alias' | sort
 	au = !git add -u && git status
 	b = branch
 	bu = !git branch --unset-upstream && git status
