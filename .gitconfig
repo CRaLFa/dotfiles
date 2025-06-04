@@ -30,6 +30,7 @@
 	ignore = !git rm -r --cached . && git add -A && git status
 	ll = log --oneline --graph --decorate=full
 	lla = log --oneline --graph --decorate=full --all
+	pd = push -d origin
 	pf = push -f
 	po = !git push -u origin $(git rev-parse --abbrev-ref @)
 	rb = rebase
