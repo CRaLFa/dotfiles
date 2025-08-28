@@ -41,3 +41,5 @@ export PATH
 }
 
 [ -x '/usr/local/bin/aws_completer' ] && complete -C '/usr/local/bin/aws_completer' aws
+
+command -v influx &> /dev/null && source <(influx completion bash)
