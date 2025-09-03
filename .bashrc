@@ -1,6 +1,11 @@
-alias ..='cd ..'
+shopt -s autocd
+shopt -s cdspell
+shopt -s dotglob
+shopt -s failglob
+shopt -s globstar
+shopt -s nullglob
+
 alias bat='batcat'
-alias cl='clear && clear'
 alias clock='watch -n 1 "date +\"%Y/%m/%dT%H:%M:%S\" | tr "T" "\\\\n" | figlet -f big"'
 alias d='docker'
 alias funcs='type $(grep -Po "^\s*\w+(?= \(\))" ~/.bashrc)'
