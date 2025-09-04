@@ -1,3 +1,5 @@
+umask 0022
+
 shopt -s autocd
 shopt -s cdspell
 shopt -s dotglob
@@ -153,7 +155,7 @@ multiplication_table () {
 
 	lns () {
 		(( $# < 2 )) && return 1
-		which gsudo &> /dev/null || {
+		command -v gsudo &> /dev/null || {
 			echo 'gsudo is required' >&2
 			return
 		}
