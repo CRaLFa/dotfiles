@@ -3,7 +3,6 @@ umask 0022
 shopt -s autocd
 shopt -s cdspell
 shopt -s dotglob
-shopt -s failglob
 shopt -s globstar
 shopt -s nullglob
 
