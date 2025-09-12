@@ -48,3 +48,9 @@ repo = 'tyru/caw.vim'
 
 [[plugins]]
 repo = 'mattn/emmet-vim'
+
+[[plugins]]
+repo = 'vim/killersheep'
+
+[[plugins]]
+repo = 'skanehira/badapple.vim'

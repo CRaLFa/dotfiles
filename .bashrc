@@ -28,7 +28,7 @@ alias viv='vi ~/.vimrc'
 
 md () {
 	(( $# < 1 )) && return 1
-	mkdir "$1" && cd "$_"
+	mkdir -p "$1" && cd "$_"
 }
 
 rd () {

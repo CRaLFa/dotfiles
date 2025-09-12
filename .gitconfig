@@ -49,6 +49,8 @@
 [user]
 	email = minami.smd@gmail.com
 	name = CRaLFa
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
 [includeIf "gitdir:~/repo/private/"]
 	path = ~/repo/private/.gitconfig
 [includeIf "gitdir:~/repo/work/"]
