@@ -10,6 +10,7 @@ alias bat='batcat'
 alias clock='watch -n 1 "date +\"%Y/%m/%dT%H:%M:%S\" | tr "T" "\\\\n" | figlet -f big"'
 alias d='docker'
 alias funcs='type $(grep -Po "^\s*\w+(?= \(\))" ~/.bashrc)'
+alias hr='yes "#" | head -n $(tput cols) | paste -sd ""'
 alias ins='sudo apt -y install'
 alias insed='apt list --installed 2> /dev/null | grep -v "自動" | cut -d "/" -f 1'
 alias ipv4='ip a | grep eth0 | grep -Po "inet\s\K[\d.]+"'
@@ -140,8 +141,10 @@ multiplication_table () {
 
 # For WSL
 [[ "$(uname -r)" == *WSL* ]] && {
+	export BROWSER='powershell.exe -c Start-Process'
+
 	alias ps1='powershell.exe'
-	alias pst='powershell.exe -Command Get-Clipboard'
+	alias pst='powershell.exe -c Get-Clipboard'
 
 	explore () {
 		explorer.exe /e,"$(wslpath -wa "${1:-.}")"
@@ -159,12 +162,12 @@ multiplication_table () {
 			return
 		}
 		local target="$(wslpath -wa "$1")" name="$(wslpath -wa "$2")"
-		gsudo powershell.exe -Command "New-Item -ItemType SymbolicLink -Path $name -Target $target"
+		gsudo powershell.exe -c "New-Item -ItemType SymbolicLink -Path $name -Target $target"
 	}
 
 	open_chrome () {
 		(( $# < 1 )) && return 1
-		powershell.exe -Command "Start-Process chrome.exe $(wslpath -wa "$1")"
+		powershell.exe -c "Start-Process chrome.exe $(wslpath -wa "$1")"
 	}
 
 	cpl () {
