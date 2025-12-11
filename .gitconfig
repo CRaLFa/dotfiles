@@ -33,6 +33,8 @@
 	pd = push -d origin
 	pf = push -f
 	po = !git push -u origin $(git rev-parse --abbrev-ref @)
+	pr = pull --rebase
+	pu = !git push -u origin $(git rev-parse --abbrev-ref @)
 	rb = rebase
 	rh1 = reset @~
 	ro = !git reset --hard origin/$(git rev-parse --abbrev-ref @)

@@ -4,9 +4,10 @@ shopt -s autocd
 shopt -s cdspell
 shopt -s dotglob
 shopt -s globstar
-shopt -s nullglob
+# shopt -s nullglob
 
 alias bat='batcat'
+alias cdg='cd $(git rev-parse --show-toplevel)'
 alias clock='watch -n 1 "date +\"%Y/%m/%dT%H:%M:%S\" | tr "T" "\\\\n" | figlet -f big"'
 alias d='docker'
 alias funcs='type $(grep -Po "^\s*\w+(?= \(\))" ~/.bashrc)'
@@ -20,6 +21,7 @@ alias ll='ls -lh'
 alias lla='ll -A'
 alias ls='ls -F --color=auto'
 alias reload='exec bash -l'
+alias sum_cb='powershell.exe -c Get-Clipboard | nkf -Lu | paste -sd "+" | bc'
 alias tree='tree -AaI ".git|node_modules"'
 alias update='sudo apt update && sudo apt -y upgrade && sudo apt -y autoremove'
 alias vibp='vi ~/.bash_profile'
@@ -63,6 +65,10 @@ repeat () {
 
 remove_dangling_images () {
 	docker rmi $(docker images -f 'dangling=true' -q)
+}
+
+docker_dir () {
+	sudo find $(dirname $(docker inspect "$1" | jq -r '.[0].GraphDriver.Data.UpperDir'))
 }
 
 bcrypt () {
@@ -142,12 +148,14 @@ multiplication_table () {
 # For WSL
 [[ "$(uname -r)" == *WSL* ]] && {
 	export BROWSER='powershell.exe -c Start-Process'
+	export EXECIGNORE='*.dll:*.mof'
+
 
 	alias ps1='powershell.exe'
 	alias pst='powershell.exe -c Get-Clipboard'
 
 	explore () {
-		explorer.exe /e,"$(wslpath -wa "${1:-.}")"
+		powershell.exe -c "$BROWSER $(wslpath -wa "${1:-.}")"
 	}
 
 	clip () {
