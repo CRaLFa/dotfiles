@@ -42,6 +42,7 @@ set wrapscan
 nnoremap / /\v
 nnoremap Y y$
 nnoremap <Esc>z :set wrap!<CR>
+nnoremap <Esc>x :echo system(getline('.'))<CR>
 
 let s:dot_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 

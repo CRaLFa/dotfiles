@@ -21,7 +21,6 @@ alias ll='ls -lh'
 alias lla='ll -A'
 alias ls='ls -F --color=auto'
 alias reload='exec bash -l'
-alias sum_cb='powershell.exe -c Get-Clipboard | nkf -Lu | paste -sd "+" | bc'
 alias tree='tree -AaI ".git|node_modules"'
 alias update='sudo apt update && sudo apt -y upgrade && sudo apt -y autoremove'
 alias vibp='vi ~/.bash_profile'
@@ -145,14 +144,34 @@ multiplication_table () {
 	done
 }
 
+upgrade_go_bin () {
+	local bin path
+	if (( $# < 1 )); then
+		select bin in $(find "${GOPATH}/bin" -type f | sort | xargs basename -a)
+		do
+			[ -n "$bin" ] && break
+			echo "Invalid input: '$REPLY'" >&2
+		done
+	else
+		bin="$1"
+	fi
+	path=$(which -a "$bin" | grep "$GOPATH" | sed -n '1p')
+	[ -z "$path" ] && {
+		echo "Binary not found: '$bin'" >&2
+		return
+	}
+	go install "$(go version -m "$path" | grep -Po '(?<=path\t).+$')@latest"
+}
+
 # For WSL
 [[ "$(uname -r)" == *WSL* ]] && {
 	export BROWSER='powershell.exe -c Start-Process'
 	export EXECIGNORE='*.dll:*.mof'
 
-
+	alias clc='fc -ln -1 | sed -E "s/^\s+//" | nkf -s | clip.exe'
 	alias ps1='powershell.exe'
 	alias pst='powershell.exe -c Get-Clipboard'
+	alias sum_cb='powershell.exe -c Get-Clipboard | nkf -Lu | paste -sd "+" | bc'
 
 	explore () {
 		powershell.exe -c "$BROWSER $(wslpath -wa "${1:-.}")"
