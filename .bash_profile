@@ -15,8 +15,6 @@ export ANDROID_HOME='/usr/local/android/sdk'
 export DPRINT_INSTALL="$HOME/.dprint"
 export BUN_INSTALL="$HOME/.bun"
 export VOLTA_HOME="$HOME/.volta"
-export MNEMONIC='intact unique level churn manual ignore siege throw super bring enter hundred'
-# export MNEMONIC='shoe agent crazy similar execute wood rare mystery among floor guitar key'
 
 PATH="$GOPATH/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
@@ -41,3 +39,4 @@ export PATH
 [ -x '/usr/local/bin/aws_completer' ] && complete -C '/usr/local/bin/aws_completer' aws
 
 command -v influx &> /dev/null && source <(influx completion bash)
+command -v jquants &> /dev/null && source <(jquants completion bash)

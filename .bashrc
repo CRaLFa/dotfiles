@@ -6,7 +6,6 @@ shopt -s dotglob
 shopt -s globstar
 # shopt -s nullglob
 
-alias bat='batcat'
 alias cdg='cd $(git rev-parse --show-toplevel)'
 alias clock='watch -n 1 "date +\"%Y/%m/%dT%H:%M:%S\" | tr "T" "\\\\n" | figlet -f big"'
 alias d='docker'
@@ -170,11 +169,10 @@ upgrade_go_bin () {
 
 	alias clc='fc -ln -1 | sed -E "s/^\s+//" | nkf -s | clip.exe'
 	alias ps1='powershell.exe'
-	alias pst='powershell.exe -c Get-Clipboard'
-	alias sum_cb='powershell.exe -c Get-Clipboard | nkf -Lu | paste -sd "+" | bc'
+	alias pst='powershell.exe -c Get-Clipboard | nkf -Lu'
 
 	explore () {
-		powershell.exe -c "$BROWSER $(wslpath -wa "${1:-.}")"
+		$BROWSER "$(wslpath -wa "${1:-.}")"
 	}
 
 	clip () {

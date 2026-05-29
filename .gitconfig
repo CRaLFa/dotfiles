@@ -34,7 +34,7 @@
 	m = merge
 	mn = merge --no-ff
 	pd = push -d origin
-	pf = push -f
+	pf = push --force-with-lease
 	po = !git push -u origin $(git rev-parse --abbrev-ref @)
 	pr = pull --rebase
 	pu = !git push -u origin $(git rev-parse --abbrev-ref @)
