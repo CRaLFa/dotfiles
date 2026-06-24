@@ -35,12 +35,12 @@
 	mn = merge --no-ff
 	pd = push -d origin
 	pf = push --force-with-lease
-	po = !git push -u origin $(git rev-parse --abbrev-ref @)
+	po = !git push -u origin $(git branch --show-current)
 	pr = pull --rebase
-	pu = !git push -u origin $(git rev-parse --abbrev-ref @)
+	pu = !git push -u origin $(git branch --show-current)
 	rb = rebase
 	rh1 = reset @~
-	ro = !git reset --hard origin/$(git rev-parse --abbrev-ref @)
+	ro = !git reset --hard origin/$(git branch --show-current)
 	rs = "!f(){ git restore $@ && git status; }; f"
 	rss = "!f(){ git restore -S $@ && git status; }; f"
 	s = status
