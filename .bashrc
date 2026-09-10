@@ -39,20 +39,6 @@ alias vibr='vi ~/.bashrc'
 alias vig='vi ~/.gitconfig'
 alias viv='vi ~/.vimrc'
 
-create_tag () {
-	gh release list || return
-	echo
-	local tag target
-	read -rp 'Please input new tag (e.g. v1.2.3): ' tag
-	[[ -z "$tag" ]] && {
-		echo 'Error: tag is empty' >&2
-		return 1
-	}
-	read -rp 'Please input target branch name (default: production): ' target
-	target="${target:-production}"
-	gh release create "$tag" --target "$target" --generate-notes && git fetch
-}
-
 md () {
 	(( $# < 1 )) && return 1
 	mkdir -p "$1" && cd "$_"
