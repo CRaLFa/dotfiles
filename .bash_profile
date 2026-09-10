@@ -15,6 +15,8 @@ export ANDROID_HOME='/usr/local/android/sdk'
 export DPRINT_INSTALL="$HOME/.dprint"
 export BUN_INSTALL="$HOME/.bun"
 export VOLTA_HOME="$HOME/.volta"
+export WASMTIME_HOME="$HOME/.wasmtime"
+export NODE_OPTIONS='--no-deprecation'
 
 PATH="$GOPATH/bin:$PATH"
 PATH="$HOME/.local/bin:$PATH"
@@ -26,10 +28,14 @@ PATH="/usr/local/flutter/bin:$PATH"
 PATH="$DPRINT_INSTALL/bin:$PATH"
 PATH="$BUN_INSTALL/bin:$PATH"
 PATH="$VOLTA_HOME/bin:$PATH"
+PATH="$WASMTIME_HOME/bin:$PATH"
 export PATH
 
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && . "$SDKMAN_DIR/bin/sdkman-init.sh"
 [ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+[ -s "$HOME/.local/share/swiftly/env.sh" ] && . "$HOME/.local/share/swiftly/env.sh"
+[ -s "$HOME/.vite-plus/env" ] && . "$HOME/.vite-plus/env"
+[ -s "$HOME/.atuin/bin/env" ] && . "$HOME/.atuin/bin/env"
 
 [ -f '/usr/local/lib/libstderred.so' ] && {
 	export LD_PRELOAD="/usr/local/lib/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"

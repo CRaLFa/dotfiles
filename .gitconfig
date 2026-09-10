@@ -58,3 +58,5 @@
 	path = ~/repo/private/.gitconfig
 [includeIf "gitdir:~/repo/work/"]
 	path = ~/repo/work/.gitconfig
+[include]
+	path = ~/.gitconfig.local
