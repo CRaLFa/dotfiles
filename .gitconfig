@@ -16,6 +16,7 @@
 	al = !git config list | grep '^alias' | sort
 	au = !git add -u && git status
 	b = branch
+	bd = !git f && git b -vv | grep ': gone]' | grep -v '^[*]' | awk '{ print $1 }' | xargs -r git b -D
 	bu = !git branch --unset-upstream && git status
 	ca = !git commit --amend --date=\"$(date -R)\"
 	cd = clone --depth 1
