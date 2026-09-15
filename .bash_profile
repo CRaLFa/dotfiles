@@ -1,4 +1,5 @@
 [ -s "$HOME/.git-prompt.sh" ] && . "$HOME/.git-prompt.sh"
+[ -s "$HOME/.atuin/bin/env" ] && . "$HOME/.atuin/bin/env"
 [ -s "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 
 export PS1='\n\[\e[32m\]\u@\h \[\e[35m\]\s \[\e[33m\]\w\[\e[36m\]$(__git_ps1) \[\e[0m\][$(date "+%Y/%m/%d %H:%M:%S")]\n$ '
@@ -35,7 +36,6 @@ export PATH
 [ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 [ -s "$HOME/.local/share/swiftly/env.sh" ] && . "$HOME/.local/share/swiftly/env.sh"
 [ -s "$HOME/.vite-plus/env" ] && . "$HOME/.vite-plus/env"
-[ -s "$HOME/.atuin/bin/env" ] && . "$HOME/.atuin/bin/env"
 
 [ -f '/usr/local/lib/libstderred.so' ] && {
 	export LD_PRELOAD="/usr/local/lib/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
