@@ -19,6 +19,11 @@ HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
 
+# プロンプト
+[ -s "$HOME/.git-prompt.sh" ] && . "$HOME/.git-prompt.sh"
+PS1='\n\[\e[32m\]\u@\h \[\e[35m\]\s \[\e[33m\]\w\[\e[36m\]$(__git_ps1) \[\e[0m\][$(date "+%Y/%m/%d %H:%M:%S")]\n$ '
+PS3='Please input NUMBER > '
+
 alias cdg='cd $(git rev-parse --show-toplevel)'
 alias clock='watch -n 1 "date +\"%Y/%m/%dT%H:%M:%S\" | tr "T" "\\\\n" | figlet -f big"'
 alias funcs='type $(grep -Pho "^\s*\w+(?= \(\))" ~/.bashrc ~/.bashrc.local)'
@@ -254,6 +259,10 @@ fi
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
 command -v atuin &> /dev/null && eval "$(atuin init bash --disable-up-arrow)"
 command -v thefuck &> /dev/null && eval "$(thefuck --alias)"
+
+[ -x '/usr/local/bin/aws_completer' ] && complete -C '/usr/local/bin/aws_completer' aws
+command -v influx &> /dev/null && source <(influx completion bash)
+command -v jquants &> /dev/null && source <(jquants completion bash)
 
 # 秘密情報や業務固有の設定 (git 管理外)
 [ -s "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
