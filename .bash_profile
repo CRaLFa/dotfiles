@@ -29,7 +29,9 @@ export PATH
 [ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ] && . "$SDKMAN_DIR/bin/sdkman-init.sh"
 [ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 [ -s "$HOME/.local/share/swiftly/env.sh" ] && . "$HOME/.local/share/swiftly/env.sh"
+# Vite+ は既存の ~/.vite-plus があればそれを再利用し、無ければ XDG 準拠の分割レイアウトに入る。
 [ -s "$HOME/.vite-plus/env" ] && . "$HOME/.vite-plus/env"
+[ -s "${XDG_CONFIG_HOME:-$HOME/.config}/vite-plus/env" ] && . "${XDG_CONFIG_HOME:-$HOME/.config}/vite-plus/env"
 [ -s "$HOME/.atuin/bin/env" ] && . "$HOME/.atuin/bin/env"
 
 [ -f '/usr/local/lib/libstderred.so' ] && {
