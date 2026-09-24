@@ -1,0 +1,4 @@
+#!/bin/bash
+# WSL から Windows 側の既定アプリで URL やパスを開く。
+# PowerShell に素の引数を渡すと & などが演算子として解釈されるため、シングルクォートで囲んで渡す。
+exec powershell.exe -NoProfile -c "Start-Process '${1//\'/\'\'}'"

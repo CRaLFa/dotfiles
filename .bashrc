@@ -177,7 +177,7 @@ upgrade_go_bin () {
 
 # For WSL
 [[ "$(uname -r)" == *WSL* ]] && {
-	export BROWSER='powershell.exe -c Start-Process'
+	export BROWSER="$HOME/.dotfiles/bin/winopen"
 	export EXECIGNORE='*.dll:*.mof'
 
 	# Windows 版 Blender を WSL から呼ぶ
