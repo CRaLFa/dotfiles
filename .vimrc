@@ -98,10 +98,13 @@ let &t_SI = "\e[5 q"
 let &t_EI = "\e[5 q"
 
 " Jump to the last edited position
-autocmd BufReadPost *
-\ if line("'\"") > 0 && line("'\"") <= line('$') |
-\   execute 'normal g`"' |
-\ endif
+augroup restore_cursor
+  autocmd!
+  autocmd BufReadPost *
+  \ if line("'\"") > 0 && line("'\"") <= line('$') |
+  \   execute 'normal g`"' |
+  \ endif
+augroup END
 
 " Enable undo history
 if has('persistent_undo')

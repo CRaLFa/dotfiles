@@ -24,9 +24,9 @@ HISTFILESIZE=2000
 PS1='\n\[\e[32m\]\u@\h \[\e[35m\]\s \[\e[33m\]\w\[\e[36m\]$(__git_ps1) \[\e[0m\][$(date "+%Y/%m/%d %H:%M:%S")]\n$ '
 PS3='Please input NUMBER > '
 
-alias cdg='cd $(git rev-parse --show-toplevel)'
+alias cdg='cd "$(git rev-parse --show-toplevel)"'
 alias clock='watch -n 1 "date +\"%Y/%m/%dT%H:%M:%S\" | tr "T" "\\\\n" | figlet -f big"'
-alias funcs='type $(grep -Pho "^\s*\w+(?= \(\))" ~/.bashrc ~/.bashrc.local)'
+alias funcs='type $(grep -Pho "^\s*\w+(?= \(\))" ~/.bashrc ~/.bashrc.local 2> /dev/null)'
 alias hr='yes "#" | head -n $(tput cols) | paste -sd ""'
 alias ins='sudo apt -y install'
 alias insed='apt list --installed 2> /dev/null | grep -v "自動" | cut -d "/" -f 1'
@@ -56,9 +56,9 @@ rd () {
 	}
 	local s=''
 	[ -w "$dir" ] || s='sudo'
-	eval "$s" rmdir "$dir" 2> /dev/null || {
+	$s rmdir "$dir" 2> /dev/null || {
 		read -rp "Remove non-empty directory '$dir' ? [y/N]: " answer
-		[ "$answer" = 'y' ] && eval "$s" rm -rf "$dir"
+		[ "$answer" = 'y' ] && $s rm -rf "$dir"
 	}
 }
 
@@ -77,10 +77,6 @@ repeat () {
 	yes "$s" | head -n "$n" | paste -sd ''
 }
 
-remove_dangling_images () {
-	docker rmi $(docker images -f 'dangling=true' -q)
-}
-
 bcrypt () {
 	local pw=${1:?usage: bcrypt PASSWORD}
 	htpasswd -nbB '' "$pw" | cut -d : -f 2 | tr -d '\n'
@@ -90,7 +86,7 @@ format_number () {
 	perl -pe 's/\d(?=(\d{3})+$)/$&,/g' <<< "${1:?usage: format_number N}"
 }
 
-cc () {
+ccount () {
 	local s=${1:-$(cat)}
 	echo -n "$s" | wc -c
 }
@@ -197,13 +193,14 @@ upgrade_go_bin () {
 			echo 'gsudo is required' >&2
 			return
 		}
-		local target="$(wslpath -wa "$src")" name="$(wslpath -wa "$dst")"
-		gsudo powershell.exe -c "New-Item -ItemType SymbolicLink -Path $name -Target $target"
+		local target name
+		target=$(wslpath -wa "$src") && name=$(wslpath -wa "$dst") || return
+		gsudo powershell.exe -c "New-Item -ItemType SymbolicLink -Path '$name' -Target '$target'"
 	}
 
 	open_chrome () {
 		local f=${1:?usage: open_chrome FILE}
-		powershell.exe -c "Start-Process chrome.exe $(wslpath -wa "$f")"
+		powershell.exe -c "Start-Process chrome.exe '$(wslpath -wa "$f")'"
 	}
 
 	cpl () {
@@ -222,10 +219,11 @@ upgrade_go_bin () {
 	}
 
 	go_coverage () {
-		local out=$(mktemp) html
-		go test -coverprofile="$out" || return
-		html=$(go tool cover -html="$out" 2>&1) || return
-		open_chrome "${html##* }"
+		local out
+		out=$(mktemp) || return
+		# 出力先を固定して go 側のブラウザ起動判定に依存しない
+		go test -coverprofile="$out" && go tool cover -html="$out" -o "$out.html" || return
+		open_chrome "$out.html"
 	}
 }
 
@@ -263,3 +261,6 @@ command -v jquants &> /dev/null && source <(jquants completion bash)
 
 # 秘密情報や業務固有の設定 (git 管理外)
 [ -s "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
+
+# git-prompt が無い環境でもプロンプトを壊さない
+declare -F __git_ps1 &> /dev/null || __git_ps1 () { :; }

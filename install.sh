@@ -9,19 +9,19 @@ main () {
 		return 1
 	}
 
-	[ -d "$DOT_DIR" ] && {
-		cd "$HOME"
-		rm -rf "$DOT_DIR"
-	}
-
-	git clone "$GIT_REPO" "$DOT_DIR" || {
-		echo 'Failed to clone repository.' >&2
+	# 既存のクローンは消さずに更新し、未コミットの変更やシンボリックリンクを壊さない
+	if [ -d "$DOT_DIR" ]; then
+		git -C "$DOT_DIR" pull --ff-only
+	else
+		git clone "$GIT_REPO" "$DOT_DIR"
+	fi || {
+		echo 'Failed to update repository.' >&2
 		return 1
 	}
 
-	for f in $(find "$DOT_DIR" -maxdepth 1 -type f -name '.*')
+	for f in "$DOT_DIR"/.[!.]*
 	do
-		ln -sfv "$f" "$HOME/$(basename "$f")"
+		[ -f "$f" ] && ln -sfv "$f" "$HOME/${f##*/}"
 	done
 }
 

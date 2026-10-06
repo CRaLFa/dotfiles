@@ -3,7 +3,7 @@
 ## Installation
 
 ```sh
-curl https://raw.githubusercontent.com/CRaLFa/dotfiles/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/CRaLFa/dotfiles/master/install.sh | bash
 ```
 
 ## ローカル設定

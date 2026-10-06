@@ -1,17 +1,11 @@
 [core]
 	pager = less -SFXni -x4
 	editor = vim
-	autocrlf = false
-	ignorecase = false
 	quotepath = false
 [pull]
 	rebase = false
-[fetch]
-	prune = false
-[rebase]
-	autoStash = false
 [alias]
-	a = "!f(){ git add $@ && git status; }; f"
+	a = "!f(){ git add \"$@\" && git status; }; f"
 	aa = !git add -A && git status
 	al = !git config list | grep '^alias' | sort
 	au = !git add -u && git status
@@ -22,7 +16,6 @@
 	cd = clone --depth 1
 	cg = config --global
 	cm = commit
-	co = checkout
 	cp = cherry-pick
 	d = diff
 	dc = diff --cached
@@ -39,12 +32,11 @@
 	pf = push --force-with-lease
 	po = !git push -u origin $(git branch --show-current)
 	pr = pull --rebase
-	pu = !git push -u origin $(git branch --show-current)
 	rb = rebase
 	rh1 = reset @~
 	ro = !git reset --hard origin/$(git branch --show-current)
-	rs = "!f(){ git restore $@ && git status; }; f"
-	rss = "!f(){ git restore -S $@ && git status; }; f"
+	rs = "!f(){ git restore \"$@\" && git status; }; f"
+	rss = "!f(){ git restore -S \"$@\" && git status; }; f"
 	s = status
 	sd = stash drop
 	sl = stash list

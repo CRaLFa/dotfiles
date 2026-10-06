@@ -36,7 +36,7 @@ export PATH
 
 [ -f '/usr/local/lib/libstderred.so' ] && {
 	export LD_PRELOAD="/usr/local/lib/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}"
-	export STDERRED_ESC_CODE="$(tput setaf 224)"
+	[ -n "$TERM" ] && STDERRED_ESC_CODE=$(tput setaf 224) && export STDERRED_ESC_CODE
 }
 
 # 対話シェル向けの設定は PATH 確定後に読み込む
