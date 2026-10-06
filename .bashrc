@@ -45,37 +45,36 @@ alias vig='vi ~/.gitconfig'
 alias viv='vi ~/.vimrc'
 
 md () {
-	(( $# < 1 )) && return 1
-	mkdir -p "$1" && cd "$_"
+	mkdir -p "${1:?usage: md DIR}" && cd "$_"
 }
 
 rd () {
-	[ -d "$1" ] || {
-		echo "Error: Directory '$1' doesn't exist." >&2
+	local dir=${1:?usage: rd DIR}
+	[ -d "$dir" ] || {
+		echo "Error: Directory '$dir' doesn't exist." >&2
 		return 1
 	}
 	local s=''
-	[ -w "$1" ] || s='sudo'
-	eval "$s" rmdir "$1" 2> /dev/null || {
-		read -rp "Remove non-empty directory '$1' ? [y/N]: " answer
-		[ "$answer" = 'y' ] && eval "$s" rm -rf "$1"
+	[ -w "$dir" ] || s='sudo'
+	eval "$s" rmdir "$dir" 2> /dev/null || {
+		read -rp "Remove non-empty directory '$dir' ? [y/N]: " answer
+		[ "$answer" = 'y' ] && eval "$s" rm -rf "$dir"
 	}
 }
 
 mt () {
-	(( $# < 1 )) && return 1
-	local d
-	d=$(dirname "$1")
+	local f=${1:?usage: mt FILE} d
+	d=$(dirname "$f")
 	[ -d "$d" ] || mkdir -p "$d" || {
 		echo 'Failed to make directory.' >&2
 		return 1
 	}
-	touch "$1"
+	touch "$f"
 }
 
 repeat () {
-	(( $# < 2 )) && return 1
-	yes "$1" | head -n $2 | paste -sd ''
+	local s=${1:?usage: repeat STR N} n=${2:?usage: repeat STR N}
+	yes "$s" | head -n "$n" | paste -sd ''
 }
 
 remove_dangling_images () {
@@ -83,18 +82,16 @@ remove_dangling_images () {
 }
 
 bcrypt () {
-	(( $# < 1 )) && return 1
-	htpasswd -nbB '' "$1" | cut -d : -f 2 | tr -d '\n'
+	local pw=${1:?usage: bcrypt PASSWORD}
+	htpasswd -nbB '' "$pw" | cut -d : -f 2 | tr -d '\n'
 }
 
 format_number () {
-	(( $# < 1 )) && return 1
-	perl -pe 's/\d(?=(\d{3})+$)/$&,/g' <<< "$1"
+	perl -pe 's/\d(?=(\d{3})+$)/$&,/g' <<< "${1:?usage: format_number N}"
 }
 
 cc () {
-	local s="$1"
-	[ -z "$s" ] && s=$(cat)
+	local s=${1:-$(cat)}
 	echo -n "$s" | wc -c
 }
 
@@ -103,16 +100,15 @@ ex_norm () {
 }
 
 commands () {
-	(( $# < 1 )) && {
-		echo 'Usage: commands APT_PACKAGE_NAME' >&2
-		return 1
-	}
-	local bins="$(dpkg -L "$1" | grep -P '(/usr)*/(s?bin|games)/')"
-	[ -n "$bins" ] && echo "$bins" | xargs basename -a | sort | uniq
+	local pkg=${1:?usage: commands APT_PACKAGE_NAME}
+	local bins
+	mapfile -t bins < <(dpkg -L "$pkg" | grep -P '(/usr)*/(s?bin|games)/')
+	(( ${#bins[@]} )) && printf '%s\n' "${bins[@]##*/}" | sort -u
 }
 
 get_certificate () {
-	openssl s_client -connect "${1}:443" < /dev/null 2> /dev/null | openssl x509 -text -noout
+	local host=${1:?usage: get_certificate HOST}
+	openssl s_client -connect "${host}:443" < /dev/null 2> /dev/null | openssl x509 -text -noout
 }
 
 rand () {
@@ -157,9 +153,9 @@ multiplication_table () {
 }
 
 upgrade_go_bin () {
-	local bin path
+	local bin path bins=("$GOPATH"/bin/*)
 	if (( $# < 1 )); then
-		select bin in $(find "${GOPATH}/bin" -type f | sort | xargs basename -a)
+		select bin in "${bins[@]##*/}"
 		do
 			[ -n "$bin" ] && break
 			echo "Invalid input: '$REPLY'" >&2
@@ -196,24 +192,25 @@ upgrade_go_bin () {
 	}
 
 	lns () {
-		(( $# < 2 )) && return 1
+		local src=${1:?usage: lns TARGET NAME} dst=${2:?usage: lns TARGET NAME}
 		command -v gsudo &> /dev/null || {
 			echo 'gsudo is required' >&2
 			return
 		}
-		local target="$(wslpath -wa "$1")" name="$(wslpath -wa "$2")"
+		local target="$(wslpath -wa "$src")" name="$(wslpath -wa "$dst")"
 		gsudo powershell.exe -c "New-Item -ItemType SymbolicLink -Path $name -Target $target"
 	}
 
 	open_chrome () {
-		(( $# < 1 )) && return 1
-		powershell.exe -c "Start-Process chrome.exe $(wslpath -wa "$1")"
+		local f=${1:?usage: open_chrome FILE}
+		powershell.exe -c "Start-Process chrome.exe $(wslpath -wa "$f")"
 	}
 
 	cpl () {
-		local item
+		local item items=(/mnt/c/Windows/system32/*.cpl)
+		items=("${items[@]##*/}")
 		if (( $# < 1 )); then
-			select item in $(find /mnt/c/Windows/system32/ -maxdepth 1 -name '*.cpl' | xargs basename -s '.cpl')
+			select item in "${items[@]%.cpl}"
 			do
 				[ -n "$item" ] && break
 				echo "Invalid input: $REPLY" >&2
@@ -227,8 +224,8 @@ upgrade_go_bin () {
 	go_coverage () {
 		local out=$(mktemp) html
 		go test -coverprofile="$out" || return
-		html=$(go tool cover -html="$out" |& rev | cut -d ' ' -f 1 | rev) || return
-		open_chrome "$html"
+		html=$(go tool cover -html="$out" 2>&1) || return
+		open_chrome "${html##* }"
 	}
 }
 
