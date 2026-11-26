@@ -1,5 +1,7 @@
 # dotfiles
 
+Dotfiles for Bash, Vim and Git
+
 ## Installation
 
 ```sh
